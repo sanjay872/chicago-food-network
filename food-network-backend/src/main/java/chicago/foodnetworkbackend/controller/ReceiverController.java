@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/re")
+@RequestMapping("/receiver")
 @CrossOrigin(origins = "*")
 public class ReceiverController {
     @Autowired
@@ -29,4 +29,6 @@ public class ReceiverController {
         service.updateReceiver(receiverDto);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @
 }
