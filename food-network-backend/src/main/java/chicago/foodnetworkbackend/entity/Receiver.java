@@ -3,8 +3,6 @@ package chicago.foodnetworkbackend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -46,11 +44,6 @@ public class Receiver {
     @Column(nullable = false)
     private String receiverType;
 
-    @ManyToMany
-    @JoinTable(
-            name = "receiver_and_food",
-            joinColumns = @JoinColumn(name = "receiver_id"),
-            inverseJoinColumns = @JoinColumn(name = "food_id"))
-    private List<FoodType> foodTypes;
-
+    @Column(nullable = false)
+    private String foodType;
 }

@@ -18,4 +18,15 @@ public class ReceiverController {
     public ResponseEntity<Long> createReceiver(@RequestBody ReceiverDto receiverDto){
         return new ResponseEntity<>(service.createReceiver(receiverDto), HttpStatus.CREATED);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ReceiverDto> getReceiverById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(service.getReceiverById(id),HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity updateReceiver(@RequestBody ReceiverDto receiverDto){
+        service.updateReceiver(receiverDto);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }

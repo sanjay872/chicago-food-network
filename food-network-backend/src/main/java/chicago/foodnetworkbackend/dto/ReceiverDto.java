@@ -1,9 +1,7 @@
 package chicago.foodnetworkbackend.dto;
 
-import chicago.foodnetworkbackend.entity.FoodType;
 import lombok.*;
 
-import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -21,5 +19,5 @@ public class ReceiverDto {
     private String miscellaneous;
     private String orgName;
     private String receiverType;
-    private List<FoodType> foodTypes;
+    private String foodType;
 }
