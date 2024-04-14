@@ -29,6 +29,9 @@ public class Receiver {
     private String password;
 
     @Column(nullable = false)
+    private String address;
+
+    @Column(nullable = false)
     private String latitude;
 
     @Column(nullable = false)
