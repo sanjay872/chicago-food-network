@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App/App';
 import Register from './components/Register/index';
+import List from './components/List/index';
+
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
@@ -31,7 +33,7 @@ const router = createBrowserRouter([
   },
   {
     path: "list",
-    element: <Register />,
+    element: <List />,
   }
 ]);
 
