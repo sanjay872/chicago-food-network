@@ -46,7 +46,7 @@ function List() {
           let lon = position.coords.longitude;
           setLatitude(lat);
           setLongitude(lon);
-          let url = `https://api.example.com/data-endpoint?latitude=${lat}&longitude=${lon}`;
+          let url = `http://localhost:8080/re/filter?lat=${lat}&lon=${lon}`;
           if (cooked && uncooked) {
             url = url + `&foodType=both`;
           } else if (cooked) {
