@@ -34,6 +34,8 @@ function ReceiverRegister() {
       },
       body: JSON.stringify(data),
     }).then((response) => {
+      let res = response.json();
+      localStorage.setItem('rec-id', res.receiverId); 
       window.location.href = '/status';
     })
       // .then((response) => response.json())
