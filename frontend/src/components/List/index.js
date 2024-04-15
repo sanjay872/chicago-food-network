@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
+import { set } from "firebase/database";
 
 function List() {
   const [latitude, setLatitude] = useState(null);
@@ -67,6 +68,7 @@ function List() {
             })
             .then((data) => {
               console.log("list");
+              setList(data);
             })
             .catch((error) => {
               console.error("Error fetching data:", error);
