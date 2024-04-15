@@ -26,9 +26,9 @@ function DonorRegister() {
       },
       body: JSON.stringify(donorForm),
     })
-      .then((response) => {
-        let a = response.json();
-        window.location.href = '/list';
+      .then((response) => response.json()).then((data) => { 
+        console.log(data) 
+        window.location.href = "/list";
       })
       // .then((data) => {
       //   setResponse(data);

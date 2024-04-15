@@ -33,11 +33,15 @@ function ReceiverRegister() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    }).then((response) => {
-      let res = response.json();
-      localStorage.setItem('rec-id', res); 
+    }).then((response) => response.json()).then((data) => { 
+
+      console.log(data)
+      localStorage.setItem('rec-id', data); 
       window.location.href = '/status';
-    })
+      })
+
+
+    
       // .then((response) => response.json())
       // .then((data) => {
       //   setResponse(data);

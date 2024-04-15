@@ -29,14 +29,13 @@ const Status = ({ userId }) => {
         }
         setStatus((prev) => !prev.status)
     
-        fetch(`http://localhost:8080/re/status?${id=id}`, {
+        fetch(`http://localhost:8080/re/status?id=${id}&status=${!status}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
         }).then((response) => {
-          let res = response.json();
         })
           // .then((response) => response.json())
           // .then((data) => {
