@@ -68,9 +68,46 @@ public class ReceiverServiceImpl implements ReceiverService {
                     .build());
         });
 
-        Map<Long, Direction> sortedCalculatedDistance = new TreeMap<>(calculatedDistance);
+        System.out.println("Calculated Data");
+        calculatedDistance.forEach((d1,d2)->{
+            System.out.println("Id:"+d1+"latitude: "+d2.getLatitude()+" longitude: "+d2.getLongitude());
+        });
+
+        // Create a list of map entries
+        List<Map.Entry<Long, Direction>> entryList = new ArrayList<>(calculatedDistance.entrySet());
+
+        // Sort the list using a custom comparator
+        entryList.sort(new Comparator<Map.Entry<Long, Direction>>() {
+            @Override
+            public int compare(Map.Entry<Long, Direction> o1, Map.Entry<Long, Direction> o2) {
+                int lat = o1.getValue().getLatitude().compareTo(o2.getValue().getLatitude());
+                System.out.println("lat: " + lat);
+                if (lat != 0)
+                    return lat < 0 ? 1 : -1;
+                int lon=o1.getValue().getLongitude().compareTo(o2.getValue().getLongitude());
+                if(lon!=0)
+                    return lon<0?1:-1;
+                return lon;
+            }
+        });
+
+        // Create a LinkedHashMap to maintain the order of elements
+        Map<Long, Direction> sortedCalculatedDistance = new LinkedHashMap<>();
+        for (Map.Entry<Long, Direction> entry : entryList) {
+            sortedCalculatedDistance.put(entry.getKey(), entry.getValue());
+        }
+
+        System.out.println("Sorted Calculated Data");
+        sortedCalculatedDistance.forEach((d1,d2)->{
+            System.out.println("Id:"+d1+"latitude: "+d2.getLatitude()+" longitude: "+d2.getLongitude());
+        });
 
         Set<Long> ids=sortedCalculatedDistance.keySet();
+
+        System.out.println("Sorted Id");
+        ids.forEach((id)->{
+            System.out.println("Id:"+id);
+        });
 
         ids.forEach((id)->{
             receiverList.forEach(data->{
@@ -78,6 +115,12 @@ public class ReceiverServiceImpl implements ReceiverService {
                     finalList.add(toReceiverDto(data));
                 }
             });
+        });
+
+
+        System.out.println("Final data");
+        finalList.forEach((data)->{
+            System.out.println("Id:"+data.getReceiverId()+"latitude: "+data.getLatitude()+" longitude: "+data.getLongitude());
         });
 
         return finalList;
