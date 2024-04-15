@@ -27,12 +27,16 @@ function ReceiverRegister() {
       data.orgName = "Individual"
     }
 
-    fetch("https://api.example.com/post-endpoint", {
+    fetch("http://localhost:8080/re", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+    }).then((response) => {
+      let res = response.json();
+      localStorage.setItem('rec-id', res.receiverId); 
+      window.location.href = '/status';
     })
       // .then((response) => response.json())
       // .then((data) => {
