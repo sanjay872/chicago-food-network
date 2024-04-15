@@ -19,14 +19,16 @@ function DonorRegister() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch("https://api.example.com/post-endpoint", {
+    fetch("http://localhost:8080/donor", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(donorForm),
     })
-      // .then((response) => response.json())
+      .then((response) => {
+        window.location.href = '/list';
+      })
       // .then((data) => {
       //   setResponse(data);
       // })
