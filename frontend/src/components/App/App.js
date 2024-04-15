@@ -28,7 +28,7 @@ function App() {
 
 
   return (
-    <div>
+    <div className='img-container'>
       <h1 className="title">Chicago Food Network</h1>
       <button style={{display: 'block', margin: '10px'}} onClick={redirectToURL}>Register</button>
       <button style={{display: 'block', margin: '10px'}} onClick={handleListPage}>Find Receivers</button>

@@ -10,6 +10,21 @@
   pointer-events: none;
 }
 
+.img-container {
+  background-image: url('../../../public/chi.jpg');
+  background-color: aliceblue;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
