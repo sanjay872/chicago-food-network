@@ -24,7 +24,7 @@ const Status = ({ userId }) => {
   };
 
   const sendStatusToBackend = (status, location) => {
-    const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+    const apiUrl = "http://localhost:8080/re/status";
 
     fetch(apiUrl, {
       method: 'POST',
