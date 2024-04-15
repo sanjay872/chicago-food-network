@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 function ReceiverRegister() {
   const [receiverForm, setReceiverForm] = useState({
-    fn: "",
-    ln: "",
-    name: "",
-    mail: "",
+    firstName: "",
+    lastName: "",
+    orgName: "",
+    email: "",
     foodType: "",
-    type: "Individual",
-    pwd: "",
+    receiverType: "Individual",
+    password: "",
     address: "",
   });
 
@@ -23,8 +23,8 @@ function ReceiverRegister() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = {...receiverForm}
-    if (receiverForm.type === "individual") {
-      data.name = "Individual"
+    if (receiverForm.receiverType === "individual") {
+      data.orgName = "Individual"
     }
 
     fetch("https://api.example.com/post-endpoint", {
@@ -52,8 +52,8 @@ function ReceiverRegister() {
         <input
           type="radio"
           value="food-bank"
-          name="type"
-          checked={receiverForm.type === "food-bank"}
+          name="receiverType"
+          checked={receiverForm.receiverType === "food-bank"}
           onChange={handleInputChange}
         />
         Food bank
@@ -63,8 +63,8 @@ function ReceiverRegister() {
         <input
           type="radio"
           value="shelter"
-          name="type"
-          checked={receiverForm.type === "shelter"}
+          name="receiverType"
+          checked={receiverForm.receiverType === "shelter"}
           onChange={handleInputChange}
         />
         Shelter home
@@ -74,22 +74,22 @@ function ReceiverRegister() {
         <input
           type="radio"
           value="individual"
-          name="type"
-          checked={receiverForm.type === "individual"}
+          name="receiverType"
+          checked={receiverForm.receiverType === "individual"}
           onChange={handleInputChange}
         />
         Individual
       </label>
 
-      {receiverForm.type != "individual" && (
+      {receiverForm.receiverType != "individual" && (
         <label
           style={{ paddingRight: "15px", display: "block", marginTop: "15px" }}
         >
           Organisation Name
           <input
             type="text"
-            name="name"
-            value={receiverForm.name}
+            name="orgName"
+            value={receiverForm.orgName}
             onChange={handleInputChange}
             style={{ marginLeft: "15px" }}
           />
@@ -101,8 +101,8 @@ function ReceiverRegister() {
         First Name
         <input
           type="text"
-          name="fn"
-          value={receiverForm.fn}
+          name="firstName"
+          value={receiverForm.firstName}
           onChange={handleInputChange}
           style={{ marginLeft: "15px" }}
         />
@@ -113,8 +113,8 @@ function ReceiverRegister() {
         Last Name
         <input
           type="text"
-          name="ln"
-          value={receiverForm.ln}
+          name="lastName"
+          value={receiverForm.lastName}
           onChange={handleInputChange}
           style={{ marginLeft: "15px" }}
         />
@@ -163,14 +163,26 @@ function ReceiverRegister() {
         Uncooked food
       </label>
 
+
+      <label style={{ paddingRight: "15px" }}>
+        <input
+          type="radio"
+          value="both"
+          name="foodType"
+          checked={receiverForm.foodType === "both"}
+          onChange={handleInputChange}
+        />
+        Both
+      </label>
+
       <label
         style={{ paddingRight: "15px", display: "block", marginTop: "15px" }}
       >
         E-mail
         <input
           type="text"
-          name="mail"
-          value={receiverForm.mail}
+          name="email"
+          value={receiverForm.email}
           onChange={handleInputChange}
           style={{ marginLeft: "15px" }}
         />
@@ -181,8 +193,8 @@ function ReceiverRegister() {
         Password
         <input
           type="text"
-          name="pwd"
-          value={receiverForm.pwd}
+          name="password"
+          value={receiverForm.password}
           onChange={handleInputChange}
           style={{ marginLeft: "15px" }}
         />
