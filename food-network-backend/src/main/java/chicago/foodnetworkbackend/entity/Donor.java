@@ -26,10 +26,10 @@ public class Donor {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column()
     private String latitude;
 
-    @Column(nullable = false)
+    @Column()
     private String longitude;
 
 }
