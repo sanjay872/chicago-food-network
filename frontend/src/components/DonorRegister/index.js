@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 function DonorRegister() {
   const [donorForm, setDonorForm] = useState({
-    fn: "",
-    ln: "",
-    mail: "",
-    pwd: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
   });
 
   const handleInputChange = (event) => {
@@ -41,8 +41,8 @@ function DonorRegister() {
         First Name
         <input
           type="text"
-          name="fn"
-          value={donorForm.fn}
+          name="firstName"
+          value={donorForm.firstName}
           onChange={handleInputChange}
           style={{ marginLeft: "15px" }}
         />
@@ -53,8 +53,8 @@ function DonorRegister() {
         Last Name
         <input
           type="text"
-          name="ln"
-          value={donorForm.ln}
+          name="lastName"
+          value={donorForm.lastName}
           onChange={handleInputChange}
           style={{ marginLeft: "15px" }}
         />
@@ -65,8 +65,8 @@ function DonorRegister() {
         E-mail
         <input
           type="text"
-          name="mail"
-          value={donorForm.mail}
+          name="email"
+          value={donorForm.email}
           onChange={handleInputChange}
           style={{ marginLeft: "15px" }}
         />
@@ -77,8 +77,8 @@ function DonorRegister() {
         Password
         <input
           type="text"
-          name="pwd"
-          value={donorForm.pwd}
+          name="password"
+          value={donorForm.password}
           onChange={handleInputChange}
           style={{ marginLeft: "15px" }}
         />

@@ -1,93 +1,199 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import "./index.css";
 
-function DonorRegister() {
-  const [donorForm, setDonorForm] = useState({
-    fn: "",
-    ln: "",
-    mail: "",
-    pwd: "",
-  });
+function List() {
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  // private String firstName;
+  // private String lastName;
+  // private String email;
+  // private String password;
+  // private String address;
+  // private String latitude;
+  // private String longitude;
+  // private String miscellaneous;
+  // private String orgName;
+  // private String receiverType;
+  // private String foodType;
+  const [list, setList] = useState([
+    {
+      firstName: "John",
+      lastName: "Doe",
+      email: "john@nfs.org",
+      orgName: "John organisation",
+      receiverType: "Food bank",
+      foodType: "food",
+    },
+    {
+      firstName: "John",
+      lastName: "Doe",
+      email: "john@nfs.org",
+      orgName: "John organisation",
+      receiverType: "individual",
+      foodType: "both",
+    },
+  ]);
+  const [foodType, setFoodType] = useState(null);
+  const [cooked, setCooked] = useState(false);
+  const [uncooked, setUncooked] = useState(false);
+  const [receiverType, setReceiverType] = useState(null);
 
-  const handleInputChange = (event) => {
-    let { name, value } = event.target;
-    setDonorForm((prev) => {
-      let a = { ...prev, ...{ [name]: value } };
-      return a;
-    });
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          let lat = position.coords.latitude;
+          let lon = position.coords.longitude;
+          setLatitude(lat);
+          setLongitude(lon);
+          let url = `https://api.example.com/data-endpoint?latitude=${lat}&longitude=${lon}`;
+          if (cooked && uncooked) {
+            url = url + `&foodType=both`;
+          } else if (cooked) {
+            url = url + `&foodType=cooked`;
+          } else if (uncooked) {
+            url = url + `&foodType=uncooked`;
+          }
+          if (receiverType) {
+            url = url + `&receiverType=${receiverType}`;
+          }
+
+          fetch(url)
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log("list");
+            })
+            .catch((error) => {
+              console.error("Error fetching data:", error);
+            });
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }, [cooked, uncooked, receiverType]);
+
+  const handleFilterFood = (event) => {
+    let { name, checked } = event.target;
+    if (name == "cooked") {
+      setCooked(checked);
+    }
+    if (name == "uncooked") {
+      setUncooked(checked);
+    }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    fetch("https://api.example.com/post-endpoint", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(donorForm),
-    })
-      // .then((response) => response.json())
-      // .then((data) => {
-      //   setResponse(data);
-      // })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+  const handleFilterReceiver = (event) => {
+    let { name, value } = event.target;
+    setReceiverType(value);
   };
 
   return (
-    <div style={{ marginLeft: "100px", marginTop: "20px" }}>
-      <label style={{ paddingRight: "15px" }}>
-        First Name
-        <input
-          type="text"
-          name="fn"
-          value={donorForm.fn}
-          onChange={handleInputChange}
-          style={{ marginLeft: "15px" }}
-        />
-      </label>
-      <label
-        style={{ paddingRight: "15px", display: "block", marginTop: "15px" }}
-      >
-        Last Name
-        <input
-          type="text"
-          name="ln"
-          value={donorForm.ln}
-          onChange={handleInputChange}
-          style={{ marginLeft: "15px" }}
-        />
-      </label>
-      <label
-        style={{ paddingRight: "15px", display: "block", marginTop: "15px" }}
-      >
-        E-mail
-        <input
-          type="text"
-          name="mail"
-          value={donorForm.mail}
-          onChange={handleInputChange}
-          style={{ marginLeft: "15px" }}
-        />
-      </label>
-      <label
-        style={{ paddingRight: "15px", display: "block", marginTop: "15px" }}
-      >
-        Password
-        <input
-          type="text"
-          name="pwd"
-          value={donorForm.pwd}
-          onChange={handleInputChange}
-          style={{ marginLeft: "15px" }}
-        />
-      </label>
-      <button style={{ marginTop: "15px" }} onClick={handleSubmit}>
-        Submit
-      </button>
+    <div>
+      <h2 style={{marginLeft: "50px"}}>List of receivers near you</h2>
+      <div style={{ display: "flex" }}>
+        <div className="left-bar">
+          <div style={{ paddingTop: "20px", paddingLeft: "50px" }}>
+            <p>Filter by</p>
+            <label style={{ marginBottom: "20px", display: "block" }}>
+              <input
+                type="checkbox"
+                checked={cooked}
+                name="cooked"
+                onChange={handleFilterFood}
+              />
+              cooked Food
+            </label>
+            <label style={{ marginBottom: "20px", display: "block" }}>
+              <input
+                type="checkbox"
+                checked={uncooked}
+                name="uncooked"
+                onChange={handleFilterFood}
+              />
+              Uncooked Food
+            </label>
+            <label>
+              Receiver Type
+              <label style={{ paddingRight: "15px", display: 'block' }}>
+                <input
+                  type="radio"
+                  value="food-bank"
+                  checked={receiverType === "food-bank"}
+                  onChange={handleFilterReceiver}
+                />
+                Food bank
+              </label>
+              <label style={{ display: 'block' }}>
+                <input
+                  type="radio"
+                  value="shelter"
+                  checked={receiverType === "shelter"}
+                  onChange={handleFilterReceiver}
+                />
+                Shelter
+              </label>
+              <label style={{ display: 'block' }}>
+                <input
+                  type="radio"
+                  value="individual"
+                  checked={receiverType === "individual"}
+                  onChange={handleFilterReceiver}
+                />
+                Individual
+              </label>
+            </label>
+          </div>
+        </div>
+        {list.length ? (
+          <ul>
+            {list.map((rec) => (
+              <li key={rec.receiverId} className="list">
+                <div>
+                  {rec.receiverType === "individual" ? (
+                    <h3>Individual</h3>
+                  ) : (
+                    <h3>
+                      {rec.orgName} <small>({rec.receiverType})</small>
+                    </h3>
+                  )}
+                  <p>
+                    Contact person: {rec.firstName} {rec.lastName}
+                  </p>
+                  {rec.foodType === "both" ? (
+                    <p>
+                      Food types accepted: <span className="tag">cooked</span>{" "}
+                      <span className="tag">uncooked</span>
+                    </p>
+                  ) : (
+                    <p>
+                      Food types accepted:{" "}
+                      <span className="tag">{rec.foodType}</span>
+                    </p>
+                  )}
+                </div>
+                <div style={{ marginLeft: "400px", position: "absolute" }}>
+                  <button>Chat</button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div>
+            <p>No List</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
 
-export default DonorRegister;
+export default List;
