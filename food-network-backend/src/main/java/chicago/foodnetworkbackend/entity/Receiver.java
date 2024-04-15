@@ -30,10 +30,10 @@ public class Receiver {
     private String address;
 
     @Column(nullable = false)
-    private String latitude;
+    private Double latitude;
 
     @Column(nullable = false)
-    private String longitude;
+    private Double longitude;
 
     @Column()
     private String miscellaneous;
@@ -46,4 +46,7 @@ public class Receiver {
 
     @Column(nullable = false)
     private String foodType;
+
+    @Column(nullable = false)
+    private boolean status;
 }

@@ -14,10 +14,11 @@ public class ReceiverDto {
     private String email;
     private String password;
     private String address;
-    private String latitude;
-    private String longitude;
+    private Double latitude;
+    private Double longitude;
     private String miscellaneous;
     private String orgName;
     private String receiverType;
     private String foodType;
+    private boolean status;
 }
