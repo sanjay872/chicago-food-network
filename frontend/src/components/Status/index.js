@@ -30,7 +30,7 @@ const Status = ({ userId }) => {
         setStatus((prev) => !prev.status)
     
         fetch(`http://localhost:8080/re/status?${id=id}`, {
-          method: "POST",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },

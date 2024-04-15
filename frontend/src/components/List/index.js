@@ -96,6 +96,10 @@ function List() {
     setReceiverType(value);
   };
 
+  const handleChat = () => {
+    window.location.href = '/chat';
+  };
+
   return (
     <div>
       <h2 style={{marginLeft: "50px"}}>List of receivers near you</h2>
@@ -181,7 +185,7 @@ function List() {
                   )}
                 </div>
                 <div style={{ marginLeft: "400px", position: "absolute" }}>
-                  <button>Chat</button>
+                  <button onClick={handleChat}>Chat</button>
                 </div>
               </li>
             ))}

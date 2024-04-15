@@ -35,7 +35,7 @@ function ReceiverRegister() {
       body: JSON.stringify(data),
     }).then((response) => {
       let res = response.json();
-      localStorage.setItem('rec-id', res.receiverId); 
+      localStorage.setItem('rec-id', res); 
       window.location.href = '/status';
     })
       // .then((response) => response.json())

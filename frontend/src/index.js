@@ -6,6 +6,7 @@ import Register from './components/Register/index';
 import List from './components/List/index';
 import Login from './components/Login/index';
 import Status from './components/Status/index';
+import Chat from './components/Chat/index';
 
 import reportWebVitals from './reportWebVitals';
 import {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: "status",
     element: <Status />,
+  },
+  {
+    path: "chat",
+    element: <Chat />,
   }
 ]);
 
