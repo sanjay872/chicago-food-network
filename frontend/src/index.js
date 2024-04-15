@@ -4,6 +4,8 @@ import './index.css';
 import App from './components/App/App';
 import Register from './components/Register/index';
 import List from './components/List/index';
+import Login from './components/Login/index';
+import Status from './components/Status/index';
 
 import reportWebVitals from './reportWebVitals';
 import {
@@ -25,15 +27,19 @@ const router = createBrowserRouter([
   },
   {
     path: "login",
-    element: <Register />,
+    element: <Login />,
   },
   {
     path: "dashboard",
-    element: <Register />,
+    element: <List />,
   },
   {
     path: "list",
     element: <List />,
+  },
+  {
+    path: "status",
+    element: <Status />,
   }
 ]);
 

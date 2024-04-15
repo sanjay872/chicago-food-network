@@ -1,0 +1,16 @@
+.list {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+}
+.tag {
+    background-color: #008000b8;
+    padding: 3px 5px;
+    border-radius: 8px;
+}
+
+.left-bar {
+    width: 15%;
+    border-right: 1px solid;
+}
