@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/donor")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://localhost:3000","http://localhost:8080"})
 public class DonorController {
 
     @Autowired
     private DonorService service;
 
     @PostMapping
-    public ResponseEntity<Long> createDonor(@RequestBody DonorDto donor){
-        return new ResponseEntity<>(service.createDonor(donor), HttpStatus.CREATED);
+    public Long createDonor(@RequestBody DonorDto donor){
+        return service.createDonor(donor);
     }
 
     @GetMapping("/{id}")

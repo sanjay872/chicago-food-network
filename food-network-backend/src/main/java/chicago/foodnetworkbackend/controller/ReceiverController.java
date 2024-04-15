@@ -17,8 +17,8 @@ public class ReceiverController {
     private ReceiverService service;
 
     @PostMapping
-    public ResponseEntity<Long> createReceiver(@RequestBody ReceiverDto receiverDto){
-        return new ResponseEntity<>(service.createReceiver(receiverDto), HttpStatus.CREATED);
+    public Long createReceiver(@RequestBody ReceiverDto receiverDto){
+        return service.createReceiver(receiverDto);
     }
 
     @GetMapping("/{id}")
